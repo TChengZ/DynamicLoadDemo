@@ -1,1 +1,3 @@
-include ':lib',':app'
+include ':lib',':app', ':dynamicloadplugin'
+project(':app').projectDir = new File('app')
+project(':dynamicloadplugin').projectDir = new File('dynamicloadplugin')

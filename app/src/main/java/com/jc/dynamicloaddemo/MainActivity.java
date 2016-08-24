@@ -1,37 +1,39 @@
 package com.jc.dynamicloaddemo;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.os.Environment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.ryg.dynamicload.internal.DLIntent;
+import com.ryg.dynamicload.internal.DLPluginManager;
+import com.ryg.dynamicload.internal.DLPluginPackage;
+
+import java.io.File;
+
+public class MainActivity extends Activity implements View.OnClickListener{
+
+    private Button mBtnLaunchActivity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mBtnLaunchActivity = (Button) findViewById(R.id.btn_launch_activity);
+        mBtnLaunchActivity.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void onClick(View view) {
+        if(view == mBtnLaunchActivity){
+            String pluginApkPath = Environment.getExternalStorageDirectory() + File.separator + "plugin.apk";
+            DLPluginManager pluginManager = DLPluginManager.getInstance(BaseApplicaiton.getInstance());
+            DLPluginPackage dlPluginPackage = pluginManager.loadApk(pluginApkPath);
+            pluginManager.startPluginActivity(this, new DLIntent(dlPluginPackage.packageName, dlPluginPackage.defaultActivity));
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

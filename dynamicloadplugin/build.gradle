@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.jc.dynamicloaddemo"
+        applicationId "com.jc.dynamicloadplugin"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -20,7 +20,14 @@ android {
 }
 
 dependencies {
+    provided files('../lib/build/libs/lib.jar')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':lib')
-//    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
 }
+
+
+task beforeBuild(dependsOn: ':lib:buildLib') << {
+
+}
+
+preBuild.dependsOn beforeBuild
