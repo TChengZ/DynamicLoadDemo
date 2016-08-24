@@ -20,9 +20,10 @@ android {
 }
 
 dependencies {
-    provided files('../lib/build/libs/lib.jar')
+//    provided files('../lib/build/libs/lib.jar')
+    compile project(':lib')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.0'
+//    compile 'com.android.support:appcompat-v7:23.1.0'
 }
 
 
