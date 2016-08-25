@@ -12,4 +12,16 @@
         android:layout_height="wrap_content"
         android:text="Second Activity"
         />
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bind Service"
+        />
+    <Button
+        android:id="@+id/btn_unbind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unBind Service"
+        />
 </LinearLayout>
